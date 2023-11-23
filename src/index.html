@@ -11,13 +11,20 @@
     <section>
       <form class="search-form" id="search-form">
         <input
+          class="form-input"
           type="text"
           name="searchQuery"
           autocomplete="off"
           placeholder="Search images..."
         />
-        <button type="submit">Search</button>
+        <button class="form-btn" type="submit">Search</button>
       </form>
+
+      <div class="gallery">
+        <!-- Картки зображень -->
+      </div>
+
+      <button type="button" class="load-more visually-hidden">Load more</button>
     </section>
 
     <script type="module" src="/main.js"></script>
