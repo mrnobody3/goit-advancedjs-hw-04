@@ -1,5 +1,5 @@
-const formRef = document.querySelector('#search-form');
-const galleryRef = document.querySelector('.gallery');
-const btnLoadMore = document.querySelector('.load-more');
-
-export { formRef, galleryRef, btnLoadMore };
+export const refs = {
+  formRef: document.querySelector('#search-form'),
+  galleryRef: document.querySelector('.gallery'),
+  btnLoadMore: document.querySelector('.load-more'),
+};

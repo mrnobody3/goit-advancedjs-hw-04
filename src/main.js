@@ -4,11 +4,11 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import { fetchImg, PER_PAGE } from './js/api';
-import { formRef, galleryRef, btnLoadMore } from './js/refs';
+import { refs } from './js/refs';
 import { markupCard } from './js/markup';
 
-formRef.addEventListener('submit', onSearchForm);
-btnLoadMore.addEventListener('click', onLoadMoreImg);
+refs.formRef.addEventListener('submit', onSearchForm);
+refs.btnLoadMore.addEventListener('click', onLoadMoreImg);
 
 let numOfPage = 1;
 let searchValue = '';
@@ -27,7 +27,7 @@ async function onSearchForm(e) {
 
   if (!searchValue) {
     onHideBtn();
-    formRef.reset();
+    refs.formRef.reset();
     return;
   }
 
@@ -48,6 +48,16 @@ async function onSearchForm(e) {
       });
       return;
     }
+
+    if (data.hits.length === data.totalHits) {
+      iziToast.show({
+        title: 'warning',
+        message: "We're sorry, but you've reached the end of search results.",
+        color: 'yellow',
+        position: 'topRight',
+      });
+    }
+
     iziToast.show({
       title: 'success',
       message: `Hooray! We found ${data.totalHits} images. `,
@@ -73,11 +83,11 @@ async function onSearchForm(e) {
     });
   }
 
-  formRef.reset();
+  refs.formRef.reset();
 }
 
 function renderMarkup(str = '') {
-  galleryRef.insertAdjacentHTML('beforeend', str);
+  refs.galleryRef.insertAdjacentHTML('beforeend', str);
 }
 
 async function onLoadMoreImg(e) {
@@ -122,13 +132,13 @@ function resetPages() {
 }
 
 function resetRender() {
-  galleryRef.innerHTML = '';
+  refs.galleryRef.innerHTML = '';
 }
 
 function onShowBtn() {
-  btnLoadMore.classList.remove('visually-hidden');
+  refs.btnLoadMore.classList.remove('visually-hidden');
 }
 
 function onHideBtn() {
-  btnLoadMore.classList.add('visually-hidden');
+  refs.btnLoadMore.classList.add('visually-hidden');
 }
